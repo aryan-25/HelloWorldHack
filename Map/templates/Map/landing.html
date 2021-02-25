@@ -1,0 +1,188 @@
+{% extends "Map/base.html" %}
+{% load static %}
+{% load account socialaccount %}
+
+{% block content %}
+<div class="container">
+    <div class="landing">
+        <div class="heading">
+            <h1>VolunteerED</h1>
+            <p>
+                We strive to celebrate the feeling of social conscience and instil a sense of community.</br>
+                Giving isn't just about money, so you don't need to be rich.</br>
+                Giving to others can be as simple as a single kind word, smile or a thoughtful gesture!</br>
+            </p>
+            <br>
+            <h3>Join us as we embark on our vision to leave a dent in the world.</h3>
+            <br>
+        </div>
+        <div class="signup">
+            <h3>REGISTER</h3>
+            <form id="signup_form" method="post" action="{% url 'account_signup' %}">
+                {% csrf_token %}
+                {% get_providers as socialaccount_providers %}
+                {% for provider in socialaccount_providers %}
+                <div class="google" onclick="location.href='{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}'">
+                    <img src="{% static 'Google.png' %}" alt="Sign Up With Google">
+                    <p class="bold">Sign Up With Google</p>
+                </div>
+                {% endfor %}
+            
+                {{ form.email.label_tag }}
+                {{ form.email }}
+                {{ form.password1.label_tag }}
+                {{ form.password1 }}
+                {{ form.password2.label_tag }}
+                {{ form.password2 }}
+                {% for fields in form %}
+                    {% if fields.errors %}
+                        {% for error in fields.errors %}
+                            <p style="margin: 5px 0; color: red;">{{ error }}</p>
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
+                <a class="mt-1" href="">By signing up, you agree to our Privacy Policy.</a>
+                {% if redirect_field_value %}
+                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                {% endif %}
+                <button type="submit">Sign Up &raquo;</button>
+            </form>
+        </div>
+    </div>
+    <div class="buttons">
+        <button onclick=location.href="{% url 'home' %}#volunteers">VOLUNTEER</button>
+        <button onclick=location.href="{% url 'home' %}#organisers">ORGANISE</button>
+    </div>
+</div>
+
+<main>
+    <div class="transition">
+        <h2>Volunteer for the issues that matter to you.</h2>
+    </div>
+    <div class="categories">
+        <div>
+            <i class="fas fa-utensils"></i>
+            <h2>Food</h2>
+        </div>
+        <div>
+            <i class="fas fa-home"></i>
+            <h2>Shelter</h2>
+        </div>        
+        <div>
+            <i class="fas fa-bullhorn"></i>
+            <h2>Express your Voice</h2>
+        </div>
+        <div>
+            <i class="fas fa-hand-holding-heart"></i>
+            <h2>Charity Events</h2>
+        </div>
+        <div>
+            <i class="fas fa-virus"></i>
+            <h2>COVID-19</h2>
+        </div>
+        <div>
+            <i class="fas fa-trash"></i>
+            <h2>Litter Picking</h2>
+        </div>
+    </div>
+    <div class="transition">
+        <h2>Make a dent in the Universe.</h2>
+    </div>
+    <div id="testimonials">
+        <div class="box">
+            <div>
+                <h3>Amy Davies</h3>
+
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                
+                <h3>Enriching Experience</h3>
+                <p>I had been willing to begin my journey as a social worker but did not know where to begin. Then, I came across VolunteerED.</p>
+                <br>
+                <p>How wonderful is it that now nobody needs to wait even for a single moment to improve the world!</p>
+                <br>
+                <p>VolunteerED provided me with the best of opportunities to work with trusted organisations and spread happiness :)</p>
+                <br>
+                <p>Thank you is the least I can say to appreciate what VolunteerED does!</p>
+            </div>
+            <div>
+                <h3>Vivek Roy</h3>
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                <h3>A platform that connects humanity</h3>
+                <p>Our NGO "WeCare" has been working on child nutrition for years.</p>
+                <br>
+                <p>Our aim is to provide nutritional food and supplements in the underpriviledged areas to reduce the rate of children dying due to malnutrition.</p>
+                <br>
+                <p>We recently created our profile on VolunteerED, and it was quite overwhelming to see such a great response and support from people all over the world.</p>
+                <br>
+                <p>We have now started getting donations from the world's top most nutrition based production companies and our services have thus increased to a great extent.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="vision">
+        <h2 class="title">Our Vision</h2>
+        <div>
+
+            <p>It is clear that Covid-19 is an unfolding humanitarian crisis that will affect all countries. Self-isolation and social distancing have given way to lockdown in many countries, with gatherings prevented and extensive restrictions on movement.</p>
+            <br>
+            <p>Joining hands with some of the most influential philanthropists and their movements is the key to rebuild the feeling of togetherness!</p>
+            <br>
+            <p>If you are looking to channel the hidden global citizen, you are at the right place!</p>
+            <br>
+            <p>For the volunteers, VolunteerED is the one-stop platform to help you reach out to some of the most influential activists around the world and collaborate with them on their movement. On the other hand, this is the most accessible forum for the organisations to seek the right people that match their purpose.</p>
+            <br>
+            <p>We will liaise with some of the notable organisations like United Nations, Malala Fun, Bill and Melinda Gates foundation and Bloomberg Philanthropies among many others. The prominent figures behind these notable foundations believe taking a social responsibility gives today’s youth a competitive advantage.</p>
+            <br>
+            <blockquote>
+                “Philanthropy gives us a competitive advantage, we think, in recruiting and retaining talent. And I can tell you from personal experience it is also good for the bottom line, as good a thing a company can do.”
+                — Michael R. Bloomberg
+            </blockquote>
+            <br>
+            <p>Remember, it’s never too late (or early) to sign up and kick-off your journey to “Make a dent in the Universe”.</p>
+            <button id="donate" class="JPO_open">DONATE</button>
+        </div>
+
+        <div id="JPO">
+            <h2>Donate</h2>
+
+            <div>
+                <h4>What do you want to donate?</h4>
+                <p>Food</p>
+                <p>Clothes</p>
+                <p>Books and Stationary</p>
+                <p>Monetary Funds</p>
+            </div>
+
+            <div>
+                <h4>Donate To</h4>
+                <p>WeCare</p>
+                <p>Hunger NGO</p>
+                <p>EduWomen</p>
+                <p>VolunteerED</p>
+            </div>
+ 
+            <!-- Add a button to close the popup (optional) -->
+            <button class="JPO_close">Close</button>
+        </div>
+    </div>
+</main>
+
+<script>
+    $(document).ready(function() {
+
+        // Initialize the plugin
+        $('#JPO').popup({
+            background: false,
+            horizontal: 'right',
+            vertical: 'bottom',
+            keepfocus: false,
+            autozindex: true,
+            blur: false,
+            transition: 'all 0.3s'
+        });
+
+        // Set default `pagecontainer` for all popups (optional, but recommended for screen readers and iOS*)
+        $.fn.popup.defaults.pagecontainer = '#container'
+    });
+</script>
+{% endblock content %}p

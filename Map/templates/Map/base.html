@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volunteer</title>
+    <link rel="stylesheet" href="{% static 'main.css' %}">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/vast-engineering/jquery-popup-overlay@2/jquery.popupoverlay.min.js"></script>
+</head>
+<body>
+    <nav>
+        <li><img src="{% static 'logo.png' %}" alt="VolunteerED"></li>
+        <li><span><a href="{% url 'landing' %}">VolunteerED</a></span></li>
+        <li><a href="{% url 'landing' %}#testimonials">Testimonials</a></li>
+        <li><a href="{% url 'landing' %}#vision">Vision</a></li>
+        {% if user.is_authenticated %}
+        <li><a href="{% url 'account_logout' %}">Sign Out</a></li>
+        {% else %}
+        <li><a href="{% url 'account_login' %}">Sign In</a></li>
+        {% endif %}
+    </nav>
+    <div>
+    </div>
+    <div id="container">
+        {% block content %}
+        {% endblock content %}
+    </div>
+    <footer>
+        <div class="footer-content">
+            <h3>VolunteerED</h3>
+            <ul class="socials">
+                <li><i class="fab fa-facebook"></i></li>
+                <li><i class="fab fa-twitter"></i></li>
+                <li><i class="fab fa-youtube"></i></li>
+                <li><i class="fab fa-linkedin"></i></li>
+            </ul>
+        </div>
+        <div class="footer-bottom">
+            <p>copyright &copy;2021 VolunteerED</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,11 @@
+{% load socialaccount %}
+{% load static %}
+
+{% get_providers as socialaccount_providers %}
+
+{% for provider in socialaccount_providers %}
+<div class="google" onclick="location.href='{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}'">
+  <img src="{% static 'Google.png' %}" alt="Sign In With Google">
+  <p class="bold">Sign In With Google</a>
+</div>
+{% endfor %}

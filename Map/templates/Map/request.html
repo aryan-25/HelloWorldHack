@@ -1,0 +1,32 @@
+{% extends 'Map/base.html' %}
+{% block content %}
+<div class="placeholder">
+    <div class="content-form">
+        {% if place %}
+        <form method="POST" action="{% url 'request' %}">
+            <h1>Reach Out for Help</h1>
+            {% csrf_token %}
+            <div class="form-section">
+                <div>
+                    <label for="first_name">First Name:</label>
+                    <input required name="first_name" type="text" placeholder="First Name" value="{{ user.first_name }}">
+                </div>
+                <div>
+                    <label for="last_name">Last Name:</label>
+                    <input required name='last_name' placeholder="Last Name" type="text" value="{{ user.last_name }}">
+                </div>
+            </div>
+            <label for="email">Email Address:</label>
+            <input required type="email" value="{{ user.email }}" placeholder="Email">
+            <label for="description">Give a brief description of your request:</label>
+            <textarea required placeholder="Description..." name="description" cols="30" rows="10"></textarea>
+            <input name="place" type="hidden" value="{{ request.GET.place }}">
+            <button>SUBMIT</button>
+        </form>
+        {% else %}
+        <h2>{{ error }}</h2>
+        <a style="display: block; margin-top: 10px;" href="{% url 'home' %}">Click here to return</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock content %}

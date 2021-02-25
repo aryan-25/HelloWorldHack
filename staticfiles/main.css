@@ -1,0 +1,591 @@
+* {
+    font-family: Inter;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+nav {
+    background-color: #000000c2;
+    display: flex;
+    align-items: center;
+    box-shadow: 2px 3px 5px #c49467c4;
+}
+
+nav li {
+    list-style-type: none;
+}
+
+nav li img {
+    width: 60px;
+    height: 55px;
+    margin: 0 10px;
+}
+
+nav li a {
+    display: block;
+    padding: 30px 20px;
+    text-decoration: none;
+    color: white;
+}
+
+nav li:not(:first-child):hover {
+    background-color: #ff8716c4;
+    color: white;
+    transition: 0.5s all;
+}
+
+.transition h2 {
+    font-size: 2.5rem;
+    padding: 100px 0;
+    font-weight: 800;
+    text-align: center;
+}
+
+.signup a, .signup label {
+    color: white;
+    text-decoration: none;
+}
+
+.signup a {
+    font-weight: bold;
+}
+
+.transition {
+    background-color: #000000e0;
+    color: white;
+}
+
+.info {
+    font-size: 2.5rem;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.title {
+    font-size: 3rem;
+    text-align: center;
+    padding: 50px 0;
+}
+
+.subtitle {
+    font-size: 2.4rem;
+    text-align: center;
+    padding: 0 0;
+}
+
+.banner {
+    padding: 20px;
+}
+
+#map {
+    width: 100%;
+    height: 85vh;  
+}
+
+.overlayMessage {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 2px 3px 5px #c49467c4;
+}
+
+.overlayMessage p {
+    margin: 10px 0;
+}
+
+.overlayMessage button {
+    width: 100%;
+    margin-top: 30px;
+}
+
+#container {
+    display: table;
+    margin: auto;
+    width: 100%;
+    max-width: 2160px;
+}
+
+#container, #testimonials {
+    background: linear-gradient(270deg, #ffae58, #fed3a5);
+    background-size: 400% 400%;
+
+    -webkit-animation: Animation 10s ease infinite;
+    -moz-animation: Animation 10s ease infinite;
+    animation: Animation 10s ease infinite;
+}
+
+#JPO {
+    background: white;
+    padding: 20px;
+}
+
+#JPO button {
+    width: 100%;
+}
+
+#donate {
+    display: table;
+    width: 100px;
+    margin: 20px auto;
+}
+
+#JPO div {
+    margin: 20px 0;
+}
+
+.box {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    padding: 30px;
+    justify-content: center;
+    align-items: center;
+}
+
+.box div {
+    background-color: #ffffff;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 20px;
+    width: 45%;
+}
+
+.box i {
+    color: #ffe234;
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+}
+
+.box h3 {
+    margin: 10px 0;
+}
+
+@-webkit-keyframes Animation {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@-moz-keyframes Animation {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@keyframes Animation {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+
+.heading, .signup, .buttons {
+    margin: 30px 0;
+}
+
+.heading {
+    text-align: center;
+}
+
+.heading h1 {
+    font-size: 5rem;
+}
+
+.heading p {
+    font-weight: 500;
+    font-size: 1.25rem;
+    line-height: 40px;
+}
+
+.landing {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    padding: 50px;
+    padding-top: 100px;
+}
+
+.signup {
+    width: 400px;
+    padding: 30px;
+    display: table;
+    margin: auto;
+    background-color: #f38824c4;
+    box-shadow: 2px 3px 5px rgb(185, 98, 27);
+}
+
+.buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.buttons button {
+    width: 45%;
+}
+
+.signup form button, #opportunity button, .placeholder button {
+    display: table;
+    margin: 20px auto 0;
+    width: 100%;
+}
+
+input:hover, textarea:hover, select:hover {
+    cursor: pointer;
+}
+
+.form {
+    display: table;
+    margin: auto;
+}
+
+input, select, option {
+    outline: none;
+    display: block;
+    height: 40px;
+    padding: 10px;
+    margin: 10px 0;
+    width: 100%;
+    border: none;
+}
+
+textarea {
+    width: 100%;
+}
+
+.form-page {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-image: url("https://image.freepik.com/free-vector/abstract-soft-watercolor-background_1055-8407.jpg");
+    height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.form-page form, .content-form {
+    width: 400px;
+    background-color: #f58b2898;
+    box-shadow: 2px 3px 5px #f38824c4;
+    background-repeat: no-repeat;
+    padding: 30px;
+    margin-bottom: 10px;
+}
+
+.form-page button {
+    width: 100%;
+}
+
+#opportunity {
+    display: table;
+    margin: auto;
+    padding: 20px;
+    margin: 50px auto;
+    background-color: #f38824c4;
+    width: 400px;
+    box-shadow: 2px 3px 5px #c49467c4;
+}
+
+button, input[type='submit'] {
+    display: block;
+    height: 50px;
+    padding: 10px;
+    background-color: black;
+    border: none;
+    color: white;
+    margin: 10px 0;
+}
+
+button:hover, input[type='submit']:hover {
+    cursor: pointer;
+}
+
+.google {
+    display: grid;
+    height: 50px;
+    grid-template-columns: auto auto;
+    align-items: center;
+    background-color: #fafafa;
+    padding: 0 20px;
+    margin: 20px 0;
+    box-shadow: 2px 2px 5px rgb(240, 128, 37); 
+}
+
+.google img {
+    width: 30px;
+}
+
+.google:hover {
+    cursor: pointer;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.placeholder {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    height: 100vh;
+}
+
+.content, .content-form {
+    padding: 30px;
+    background-color: white;
+    border: 2px solid #f38824c4;
+}
+
+.content h1, .content-form h1 {
+    margin: 10px 0;
+}
+
+.optionsDiv {
+    padding: 20px 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+strong  {
+    display: block;
+    margin: 20px 0 10px 0;
+    font-size: 1.25rem;
+}
+
+.options {
+    padding: 10px;
+    align-items: center;
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 10px;
+    justify-content: space-around;
+    margin: 10px;
+    border: 5px solid #000000c4;
+    border-radius: 20px;
+    box-shadow: 2px 3px 5px #c49467c4;
+    transition: 0.1s all;
+    background-color: white;
+}
+
+.options:hover {
+    cursor: pointer;
+    box-shadow: none;
+}
+
+#pac-input, #pac-input2 {
+    outline: 1px solid #f38824c4;
+}
+
+.form-section {
+    display: flex;
+    gap: 10px;
+}
+
+textarea {
+    border: none;
+    margin: 10px 0;
+    padding: 10px;
+    font-family: Inter;
+    outline: none;
+    resize: none;
+}
+
+label {
+    display: block;
+}
+
+.categories {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-content: center;
+    justify-content: center;
+}
+
+.categories i {
+    font-size: 5rem;
+    color: #ffffff;
+    margin-bottom: 20px;
+}
+
+.categories div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 40vh;
+    color: white;
+    background-size: 400% 400%;
+    -webkit-animation: Animation 1s ease infinite;
+    -moz-animation: Animation 1s ease infinite;
+    animation: Animation 1s ease infinite;
+}
+
+.categories div:first-child {background: linear-gradient(65deg, #43cea2, #185a9d);}
+.categories div:nth-child(2) {background: linear-gradient(65deg, #FFA17F, #00223E);}
+.categories div:nth-child(3) {background: linear-gradient(65deg, #360033, #0b8793);}
+.categories div:nth-child(4) {background: linear-gradient(65deg, #D38312, #A83279);}
+.categories div:nth-child(5) {background: linear-gradient(65deg, #5d4517, #a8caba);}
+.categories div:nth-child(6) {background: linear-gradient(65deg, #f0c27b, #4b1248);}
+
+#vision {
+    background-color: rgb(255, 240, 223);
+    color: #000000c2;
+}
+
+#vision div {
+    width: 80%;
+    display: table;
+    margin: auto;
+    padding: 0 0 50px 0;
+}
+
+.vision p {
+    font-size: 1.25rem;
+}
+
+blockquote {
+    display: table;
+    width: 80%;
+    margin: auto;
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+footer {
+    padding: 10px;
+    padding-top: 20px;
+    background-color: #eba462ec;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.footer-content{
+    display: table;
+    text-align: center;
+    margin: auto;
+}
+
+.footer-content h3, .footer-content i {
+    font-size: 1.6rem;
+    font-weight: 800;
+    text-transform: capitalize;
+}
+
+.socials {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem 0;
+}
+
+.socials li {
+    margin: 0 10px;
+}
+
+.socials a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.socials a i {
+    font-size: 1.1rem;
+    transition: color .4s ease;
+}
+
+.socials i:hover  {
+    transition: 0.25s all;
+    cursor: pointer;
+    color: white;
+}
+
+.footer-bottom {
+    /* background: rgb(255, 174, 0); */
+    background: #000000e3;
+    color: white;
+    width: 100%;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.footer-bottom p {
+    font-size: 1rem;
+    word-spacing: 2px;
+    text-transform: capitalize;
+}
+
+.footer-bottom span {
+    text-transform: uppercase;
+    opacity: .4;
+    font-weight: 200;
+}
+
+.opportunityParent {
+    background-color: rgb(255, 240, 223);
+    padding: 20px;
+}
+
+.opportunityParent p {
+    text-align: center;
+    font-size: 1.25rem;
+}
+
+.popupcontent {
+    text-align: center;
+    width: 250px;
+    height: auto;
+    background: #f7f7f7;
+    padding: 10px 10px;
+    border-radius: 20px 0px 0 20px;
+}
+
+@media screen and (max-width: 800px) {
+    nav li:nth-of-type(5), nav li:nth-of-type(3), nav li:nth-of-type(4) {
+        display: none;
+    }
+    .google {
+        font-size: 0.75rem;
+    }
+    .categories {
+        grid-template-columns: 1fr 1fr;
+    }
+    .transition {
+        padding: 20px;
+    }
+    .transition h2 {
+        font-size: 1.5rem;
+    }
+    .categories h2 {
+        font-size: 1.25rem;
+    }
+    .box div {
+        flex-direction: column;
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .categories {
+        grid-template-columns: 1fr;
+    }
+    .box, .landing, .signup {
+        padding: 20px;
+    }
+    .signup, .form-page form, .content-form, #opportunity {
+        width: 90%;
+    }
+    .title, .heading h1 {
+        font-size: 2rem !important;
+    }
+    .heading p {
+        font-size: 1rem;
+    }
+}
+

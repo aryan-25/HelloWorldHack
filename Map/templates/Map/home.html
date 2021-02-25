@@ -1,0 +1,192 @@
+{% extends 'Map/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="banner">
+
+    <h2 id="volunteers" class="info">Volunteers, Find Opportunities</h2>
+</div>
+
+<div id="map">
+    
+</div>
+
+<div class="optionsDiv">
+    <div onclick='select("food")'; id="food" class="options" data-selected=1 data-name="Food">
+        <i class="fas fa-utensils"></i>
+        <p>Food</p>
+    </div>
+    <div onclick='select("shelter")'; id="shelter" class="options" data-selected=1 data-name="Shelter">
+        <i class="fas fa-home"></i>
+        <p>Shelter</p>
+    </div>
+    <div onclick='select("voice")'; id="voice" class="options" data-selected=1 data-name="Express your Voice">
+        <i class="fas fa-bullhorn"></i>
+        <p>Express your Voice</p>
+    </div>
+    <div onclick='select("charity")'; id="charity" class="options" data-selected=1 data-name="Charity Event">
+        <i class="fas fa-hand-holding-heart"></i>
+        <p>Charity Events</p>
+    </div>
+    <div onclick='select("covid")'; id="covid" class="options" data-selected=1 data-name="COVID-19">
+        <i class="fas fa-virus"></i>
+        <p>COVID-19</p>
+    </div>
+    <div onclick='select("litter")'; id="litter" class="options" data-selected=1 data-name="Litter Picking">
+        <i class="fas fa-trash"></i>
+        <p>Litter Picking</p>
+    </div>
+</div>
+
+<div class="opportunityParent">
+
+    <h2 id="organisers" class="info">Organisers, want to share an opportunity?</h2>
+
+    <p>Help us bring our mission and vision to life by empowering today’s youth with all the support they need.</p>
+    <br>
+    <p>Let’s collaborate on our shared goals and create a ripple effect that will last for generations to come.</p>
+    <br>
+    <div class="sideBySide">
+        <form id="opportunity" method="POST" action="{% url 'opportunity' %}">
+            {% csrf_token %}
+            <div class="form-section">
+                <div>
+                    <label for="first_name">First Name:</label>
+                    <input required name="first_name" type="text" placeholder="First Name" value="{{ user.first_name }}">
+                </div>
+                <div>
+                    <label for="last_name">Last Name:</label>
+                    <input required name='last_name' placeholder="Last Name" type="text" value="{{ user.last_name }}">
+                </div>
+            </div>
+            <label for="email">Email Address:</label>
+            <input required type="email" value="{{ user.email }}" placeholder="Email">
+            <label for="category">Select a category:</label>
+            <select name="category">
+                <option>Food</option>
+                <option>Shelter</option>
+                <option>Express your Voice</option>
+                <option>Charity Event</option>
+                <option>COVID-19</option>
+                <option>Litter Picking</option>
+            </select>
+            <label for="description">Give a brief description of the opportunity:</label>
+            <textarea required placeholder="Description..." name="description" cols="30" rows="10"></textarea>
+            <label for="location">Location: </label>
+            <input required id="pac-input" name="place" class="controls" type="text" placeholder="Enter a location" onkeypress="if (event.keyCode == 13) {return false;}"/>
+            <input required name="lat" type="hidden">
+            <input required name="lng" type="hidden">
+            <button>POST</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    // Create the script tag, set the appropriate attributes
+    var script = document.createElement('script');
+    script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDfslaIC4LN5KWJfV8kWEUid116EutZwQ8&callback=initMap&libraries=places';
+    script.async = true;
+    var positions = [];
+
+    // Attach your callback function to the `window` object
+    window.initMap = function() {
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: 55.94, lng: -3.1883},
+            zoom: 12,
+        });
+
+        var infowindow = new google.maps.InfoWindow();
+        function makeInfoWindowEvent(map, infowindow, contentString, marker) {
+            google.maps.event.addListener(marker, 'click', function() {
+                infowindow.setContent(contentString);
+                infowindow.open(map, marker);
+            });
+        }
+        
+        $.ajax({
+            url: "{% url 'places' %}",
+            data: {
+            'csrfmiddlewaretoken': "{{ csrf_token }}"
+            },
+            method: "POST",
+            dataType: 'json',
+            success: function (data) {
+                for (i = 0; i < data.length; i++) {
+                    var marker = new google.maps.Marker({
+                        position: {lat: parseFloat(data[i].latitude), lng: parseFloat(data[i].longitude)},
+                        icon: {
+                            url: "https://storage.googleapis.com/volunteer-ed/" + encodeURI(data[i].category) + ".png",
+                            scaledSize: new google.maps.Size(25, 25), // scaled size
+                            origin: new google.maps.Point(0,0), // origin
+                            anchor: new google.maps.Point(0, 0) // anchor,
+                        },
+                        map: map,
+                    });
+                    var contentString = 
+                    "<div class='overlayMessage'>" +
+                        "<h2>" + data[i].name + "</h2>" + 
+                        "<p>" + data[i].description + "</p>" +
+                        "<button onclick=location.href='request?place=" + data[i].id + "'>REACH OUT</button>" +
+                    "</div>"
+                    makeInfoWindowEvent(map, infowindow, contentString, marker);
+                    positions.push([data[i].category, marker]);
+                }
+            }
+        });
+
+        var options = document.getElementsByClassName("options");
+        const input = document.getElementById("pac-input");
+        const searchBox = new google.maps.places.SearchBox(input);
+        // Bias the SearchBox results towards current map's viewport.
+        map.addListener("bounds_changed", () => {
+            searchBox.setBounds(map.getBounds());
+        });
+        // Listen for the event fired when the user selects a prediction and retrieve
+        // more details for that place.
+        searchBox.addListener("places_changed", () => {
+            const places = searchBox.getPlaces();
+            document.getElementsByName("lat")[0].value = places[0].geometry.location.lat();
+            document.getElementsByName("lng")[0].value = places[0].geometry.location.lng();
+        });
+    };
+
+    // Append the 'script' element to 'head'
+    document.head.appendChild(script);
+</script>
+
+<script>
+    function select(id) {
+        var elem = document.getElementById(id)
+        // if selected
+        if (elem.getAttribute("data-selected") == 0) {
+            elem.setAttribute("data-selected", 1);
+            elem.style.border = "5px solid #000000c4";
+        }
+        else {
+            elem.setAttribute("data-selected", 0);
+            elem.style.border = "2px solid black";
+        }
+
+        var options = document.getElementsByClassName("options");
+        var chosen = [];
+        
+        for (let i = 0; i < positions.length; i++) {
+            positions[i][1].setMap(map);
+        }
+
+        for (let i = 0; i < options.length; i++) {
+            if (options[i].getAttribute("data-selected") == 0) {
+                chosen.push(options[i].getAttribute("data-name"));
+            }
+        }
+
+        for (let i = 0; i < positions.length; i++) {
+            if (chosen.includes(positions[i][0])) {
+                positions[i][1].setMap(null);
+            }
+        }
+
+    }
+</script>
+
+{% endblock content %}

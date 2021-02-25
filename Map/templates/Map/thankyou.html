@@ -1,0 +1,11 @@
+{% extends 'Map/base.html' %}
+
+{% block content %}
+<div class="placeholder">
+    <div class="content">
+        <h1>Thank you!</h1>
+        <p>Your request has successfully been submitted. We will now verify this request and email you once it is verified.</p>
+        <a href="{% url 'home' %}">Click here to return</a>
+    </div>
+</div>
+{% endblock content %}

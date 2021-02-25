@@ -1,0 +1,20 @@
+{% extends "socialaccount/base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% trans "Social Network Login Failure" %}{% endblock %}
+
+{% block content %}
+<div class="fluid">
+    <nav>
+      <h2><a href="{% url 'home' %}">PrintOnline</a></h2>
+      <a href="{% url 'account_login' %}">Sign In</a>
+    </nav>
+</div>
+
+<div class="placeholder">
+    <h1 class="mb-0 title">{% trans "Social Network Login Failure" %}</h1>
+    <p>{% trans "An error occurred while attempting to login via your social network account." %}</p>
+    <a href="{% url 'home' %}">Click here to return to the homepage</a>
+</div>
+{% endblock %}

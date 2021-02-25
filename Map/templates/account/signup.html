@@ -1,0 +1,47 @@
+{% extends "Map/base.html" %}
+
+{% load i18n %}
+{% load account socialaccount %}
+{% load static %}
+
+{% block head_title %}{% trans "Signup" %}{% endblock %}
+
+{% block content %}
+
+<div class="form-page">
+  <form id="signup_form" method="post" action="{% url 'account_signup' %}">
+  <h1>{% trans "Sign Up" %}</h1>
+    {% csrf_token %}
+
+  {% get_providers as socialaccount_providers %}
+  {% for provider in socialaccount_providers %}
+    <div class="google" onclick="location.href='{% provider_login_url provider.id process=process scope=scope auth_params=auth_params %}'">
+      <img src="{% static 'Google.png' %}" alt="Sign Up With Google">
+      <p class="bold">Sign Up With Google</a>
+    </div>
+  {% endfor %}
+
+    {{ form.email.label_tag }}
+    {{ form.email }}
+    {{ form.password1.label_tag }}
+    {{ form.password1 }}
+    {{ form.password2.label_tag }}
+    {{ form.password2 }}
+    {% for fields in form %}
+        {% if fields.errors %}
+            {% for error in fields.errors %}
+                <p style="margin: 5px 0; color: red;">{{ error }}</p>
+            {% endfor %}
+        {% endif %}
+    {% endfor %}
+    <a class="mt-1" href="">By signing up, you agree to our Privacy Policy.</a>
+    {% if redirect_field_value %}
+    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+    {% endif %}
+    <button type="submit">{% trans "Sign Up" %} &raquo;</button>
+  </form>
+<p>{% blocktrans %}Already have an account? Please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
+</div>
+
+
+{% endblock %}
